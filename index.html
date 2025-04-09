@@ -3,9 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Someone Special</title>
+    <title>Untukmu yang Berharga</title>
     <style>
-        /* Base Styles */
+    .p-image{
+        margin-top: 20px;
+    }
+    .date-idea-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      max-width: 400px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .date-idea {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+      min-height: 60px;
+    }
+
+    .generate-idea-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .generate-idea-btn:hover {
+      background-color: #45a049;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .close-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #c0392b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +125,6 @@
             font-size: 1rem;
         }
         
-        /* Layout */
         .container {
             width: 100%;
             max-width: 100%;
@@ -68,7 +149,6 @@
             transform: translateY(0);
         }
         
-        /* Header */
         header {
             background-color: #f2d7d9;
             padding: 20px 0;
@@ -122,6 +202,16 @@
             transform: scale(1.05);
         }
         
+        .main-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid white;
+        }
+        
         /* Messages Section */
         #messages {
             background-color: #fdf6f6;
@@ -154,54 +244,59 @@
             background-color: #f9f1f0;
         }
         
-        .memory-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-top: 20px;
+        /* Vertical Gallery */
+        .vertical-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
         }
         
-        .memory-item {
-            position: relative;
+        .gallery-item {
+            width: 100%;
+            max-width: 400px;
             border-radius: 10px;
             overflow: hidden;
-            height: 800px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            opacity: 0;
-            transform: scale(0.9);
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        
-        .memory-item.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .memory-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .memory-item:hover .memory-image {
-            transform: scale(1.1);
-        }
-        
-        .memory-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            padding: 10px;
-            transform: translateY(100%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
         
-        .memory-item:hover .memory-caption {
-            transform: translateY(0);
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Motivation Section */
+        #motivation {
+            background-color: #f2e9e4;
+            text-align: center;
+        }
+        
+        .motivation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .motivation-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .motivation-icon {
+            font-size: 3rem;
+            color: #e8a9a9;
+            margin-bottom: 20px;
         }
         
         /* Awards Section */
@@ -250,6 +345,95 @@
         .award-title {
             font-weight: 600;
             margin-bottom: 5px;
+        }
+        
+        /* Love Letter Section */
+        #love-letter {
+            background-color: #f8e1e1;
+            text-align: center;
+        }
+        
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .letter-content {
+            text-align: left;
+            font-style: italic;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .letter-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .letter-seal {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background-color: #e8a9a9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .letter-seal:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Kiss Section */
+        #kiss {
+            background-color: #f2d7d9;
+            text-align: center;
+        }
+        
+        .kiss-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        .kiss-icon {
+            font-size: 100px;
+            color: #e8a9a9;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .kiss-icon:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        .kiss-counter {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #5d576b;
         }
         
         /* Contact Section */
@@ -335,6 +519,21 @@
             }
         }
         
+        /* Kiss Animation */
+        @keyframes floatKiss {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+        
         /* Modal */
         .modal {
             display: none;
@@ -391,6 +590,15 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease;
+            background: url('image copy 9.png') no-repeat center center;
+        }
+        
+        .loading p {
+            margin-top: 150px;
+            position: absolute;
+            font-size: 30px;
+            font-weight: 700;
+            color: #e0e0e0;
         }
         
         .loading.hidden {
@@ -439,6 +647,97 @@
             }
         }
         
+        /* Countdown Timer */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .countdown-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 180px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e8a9a9;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #5d576b;
+        }
+        
+        /* Love Meter */
+        .love-meter-container {
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .love-meter {
+            height: 30px;
+            background-color: #f2d7d9;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .love-meter-fill {
+            height: 100%;
+            background: linear-gradient(to right, #e8a9a9, #d68e8e);
+            width: 0;
+            transition: width 1s ease;
+            border-radius: 15px;
+        }
+        
+        .love-meter-text {
+            font-size: 1.2rem;
+            color: #5d576b;
+        }
+        
+        /* Date Idea Generator */
+        .date-idea-container {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .date-idea {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        
+        .generate-idea-btn {
+            background-color: #e8a9a9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .generate-idea-btn:hover {
+            background-color: #d68e8e;
+            transform: scale(1.05);
+        }
+        
         /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
@@ -456,6 +755,10 @@
             z-index: 100;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: background-color 0.3s ease;
+        }
+
+        .text-pertama-bertemu {
+            margin-top: 20px;
         }
         
         body.dark-mode {
@@ -476,7 +779,10 @@
         }
         
         body.dark-mode #messages,
-        body.dark-mode #awards {
+        body.dark-mode #awards,
+        body.dark-mode #love-letter,
+        body.dark-mode #kiss,
+        body.dark-mode #motivation {
             background-color: #2c2c34;
         }
         
@@ -489,7 +795,11 @@
         }
         
         body.dark-mode .message-card,
-        body.dark-mode .award {
+        body.dark-mode .award,
+        body.dark-mode .letter-container,
+        body.dark-mode .love-meter-container,
+        body.dark-mode .date-idea-container,
+        body.dark-mode .motivation-container {
             background-color: #3d3a4b;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
@@ -556,8 +866,37 @@
                 font-size: 1.8rem;
             }
             
-            .memory-grid {
-                grid-template-columns: 1fr 1fr;
+            .welcome-image {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .main-image {
+                max-width: 400px;
+            }
+            
+            .gallery-item {
+                max-width: 500px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .kiss-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .kiss-icon {
+                font-size: 70px;
+            }
+            
+            .countdown-box {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -567,7 +906,9 @@
 </head>
 <body>
     <div class="loading">
-        <div class="loading-heart"></div>
+        <div class="loading-heart">
+        </div>
+        <p>Indriyani Ayu Friendifull</p>
     </div>
     
     <!-- Floating Hearts Container -->
@@ -578,8 +919,10 @@
         <nav>
             <a href="#welcome" class="nav-link">Beranda</a>
             <a href="#messages" class="nav-link">Pesan</a>
-            <a href="#memories" class="nav-link">Kenangan</a>
+            <a href="#memories" class="nav-link">Galeri</a>
+            <a href="#motivation" class="nav-link">Semangat</a>
             <a href="#awards" class="nav-link">Penghargaan</a>
+            <a href="#love-letter" class="nav-link">Surat Cinta</a>
             <a href="#contact" class="nav-link">Kontak</a>
         </nav>
     </header>
@@ -588,10 +931,31 @@
     <section id="welcome">
         <div class="container">
             <div class="welcome-content">
-                <h1>Untuk Seseorang Istimewa</h1>
+                <h1>Untuk Kamu Yang Sangat Istimewa</h1>
                 <img src="image.png" alt="Orang Istimewa" class="welcome-image">
                 <p>Selamat datang di ruang yang dibuat khusus untukmu. Tempat di mana aku bisa berbagi perasaanku, kenangan kita, dan semua momen spesial yang telah kita bagikan.</p>
-                <p>Gulir ke bawah untuk menjelajahi lebih banyak...</p>
+                <!-- <p>Gulir ke bawah untuk melihat lebih banyak kejutan...</p> -->
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-container" id="countdown">
+                    <div class="countdown-box">
+                      <div class="countdown-value">1710</div>
+                      <div class="countdown-label">Hari</div>
+                    </div>
+                    <!-- <div class="countdown-box">
+                      <div class="countdown-value">00</div>
+                      <div class="countdown-label">Jam</div>
+                    </div>
+                    <div class="countdown-box">
+                      <div class="countdown-value">00</div>
+                      <div class="countdown-label">Menit</div>
+                    </div>
+                    <div class="countdown-box">
+                      <div class="countdown-value">00</div>
+                      <div class="countdown-label">Detik</div>
+                    </div> -->
+                  </div>
+                  <p class="text-pertama-bertemu" id="countdown-text">Sejak pertama kali kita bertemu (4 Agustus 2020)</p>
             </div>
         </div>
     </section>
@@ -616,28 +980,97 @@
             
             <div class="message-card">
                 <div class="message-date">31 Desember 2024</div>
-                <h3>Setahun Bersamamu</h3>
+                <h3>Bersamamu</h3>
                 <p>Saat kita menutup satu bab dan memulai yang baru, aku tidak bisa tidak merefleksikan semua momen indah yang telah kita bagikan. Setiap tawa, setiap percakapan, setiap momen tenang bersama adalah hadiah. Mari kita ciptakan lebih banyak kenangan bersama di tahun-tahun mendatang.</p>
             </div>
         </div>
     </section>
     
-    <!-- Memories Section -->
+    <!-- Memories Section with Vertical Gallery -->
     <section id="memories">
         <div class="container">
-            <h2>Kenangan Kita</h2>
-            <p>Beberapa momen favoritku yang kita bagikan bersama...</p>
+            <h2>Sedikit Keindahan Dirimu</h2>
+            <p>Kamu indah bukan hanya karena rupa, tapi karena kamu selalu jadi dirimu sendiri — dan itu yang paling memikat bagiku.</p>            
             
-            <div class="memory-grid">
-                <div class="memory-item">
-                    <video src="WhatsApp Video 2025-02-25 at 03.08.55.mp4" controls></video>
-                    <div class="memory-caption">Piknik pertama kita di taman</div>
+            <div class="vertical-gallery">
+                <!-- <div class="gallery-item">
+                    <img src="image copy 2.png" alt="Kenangan 1">
                 </div>
-                
-                <div class="memory-item">
-                    <img src="image copy.png" alt="Kenangan 2" class="memory-image">
-                    <div class="memory-caption">Matahari terbit di pantai</div>
+                <div class="gallery-item">
+                    <img src="image copy 3.png" alt="Kenangan 2">
+                </div> -->
+                <div class="gallery-item">
+                    <img src="image copy 4.png" alt="Kenangan 3">
                 </div>
+                <div class="gallery-item">
+                    <img src="image copy 5.png" alt="Kenangan 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 6.png" alt="Kenangan 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 7.png" alt="Kenangan 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 8.png" alt="Kenangan 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 10.png" alt="Kenangan 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 11.png" alt="Kenangan 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 12.png" alt="Kenangan 10">
+                </div>
+                <div class="gallery-item">
+                    <img src="image copy 13.png" alt="Kenangan 11">
+                </div>
+            </div>
+
+            <p class="p-image" ><small>Kamu Cantik Jangan Sampe Menjadikan Kecanikan Mu Untuk Disukai Banyak Lekaki Ya 😶 </small></p>
+            
+            <!-- Date Idea Generator -->
+            <!-- <div class="date-idea-container">
+                <h3>Kata-Kata Semangat</h3>
+                <div class="date-idea" id="date-idea">
+                  Klik tombol di bawah untuk mendapatkan motivasi hidup hari ini!
+                </div>
+                <button class="generate-idea-btn" id="generate-idea-btn">
+                  <i class="fas fa-random"></i> Dapatkan Motivasi
+                </button>                
+              </div>
+            
+              <div id="motivasiModal" class="modal">
+                <div class="modal-content">
+                  <p>Aku akan selalu ada untukmu, jadi jangan menyerah karena kamu nggak sendiri. Kamu punya kamu. ❤️</p>
+                  <button class="close-btn" id="closeModal">Tutup</button>
+                </div>
+              </div> -->
+        </div>
+    </section>
+    
+    <!-- Motivation Section -->
+    <section id="motivation">
+        <div class="container">
+            <h2>Sedikit Semangat Untuk kamu Yang sedang berjuang</h2>
+            <div class="motivation-container">
+                <div class="motivation-icon">
+                    <i class="fas fa-hands-praying"></i>
+                </div>
+                <p class="motivation-text">
+                    Aku tahu kamu akan memulai kembali perjalanan di pondok pesantren. Aku ingin kamu tahu bahwa aku sangat bangga padamu! Ini adalah langkah besar menuju kehidupan yang lebih baik.
+                </p>
+                <p class="motivation-text">
+                    Ingatlah selalu bahwa di balik semua tantangan yang akan kamu hadapi, ada pahala dan kebahagiaan yang menantimu. Setiap tetes keringat dan usaha kerasmu akan terbayar dengan kebaikan yang berlipat.
+                </p>
+                <p class="motivation-text">
+                    Aku akan selalu mendukungmu dari jauh. Jangan lupa untuk tetap semangat, jaga kesehatan, dan nikmati setiap proses belajarmu. Kamu kuat, kamu bisa, dan aku percaya padamu!
+                </p>
+                <p class="motivation-text">
+                    Jika suatu saat kamu merasa lelah atau rindu rumah, ingatlah bahwa ada seseorang di sini yang selalu mendoakan yang terbaik untukmu. Kamu tidak sendirian!
+                </p>
+                <p><small>Yang Mencintai Mu : AdamRamadhan ❤️</small></p>
             </div>
         </div>
     </section>
@@ -676,14 +1109,46 @@
         </div>
     </section>
     
+    <!-- Love Letter Section -->
+    <section id="love-letter">
+        <div class="container">
+            <h2>Surat Cinta Untukmu</h2>
+            <p>Baca pesan rahasia ini hanya untukmu...</p>
+            
+            <div class="letter-container">
+                <div class="letter-seal" id="letter-seal">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="letter-content">
+                    <p>Hi Cantik,</p>
+                    <p>Setiap kali aku mencoba menuliskan perasaanku untukmu, kata-kata selalu terasa kurang. Bagaimana mungkin aku bisa menggambarkan betapa berartinya kamu bagiku dalam beberapa paragraf sederhana?</p>
+                    <p>Kamu adalah sinar matahari di hari-hari kelamku, tawa yang mengisi keheninganku, dan alasan mengapa aku tersenyum tanpa alasan. Aku bersyukur setiap hari karena memiliki seseorang sepertimu dalam hidupku.</p>
+                    <p>Terima kasih telah menjadi dirimu yang luar biasa. Terima kasih untuk semua momen kecil yang kita bagi bersama. Terima kasih untuk cinta, dukungan, dan kebahagiaan yang kamu bawa ke dalam hidupku.</p>
+                    <p>Aku tidak tahu apa yang akan terjadi di masa depan, tapi satu hal yang aku tahu pasti – aku ingin kamu ada di sana bersamaku.</p>
+                    <p>Dan meskipun aku bukan seorang santri atau lelaki yang terlihat paling sempurna, dalam hal kasih sayang dan cinta, aku yakin aku bisa menyaingi siapa pun... kecuali ayahmu — karena bagiku, dia adalah lelaki pertama yang pantas kamu hormati dan cintai.</p>
+                    <p>Dengan semua cintaku,</p>
+                    <p>Selamanya milikmu</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <h2>Sedikit Tambahan</h2>
             <p>Klik tombol di bawah untuk kejutan!</p>
             <button class="heart-button" id="heart-button">
-                <i class="fas fa-heart"></i> Kirim 
+                <i class="fas fa-heart"></i> Kirim Cinta 
             </button>
+            
+            <!-- Secret Message (hidden until button click) -->
+            <div id="secret-message" style="display: none; margin-top: 20px; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h3>Janjiku!</h3>
+                <p>Ada banyak hal yang ingin aku lakukan bersamamu. Dari semua hal itu, yang paling aku inginkan adalah membuatmu bahagia. Aku sudah berjanji akan selalu mencintaimu, bahkan hingga kamu dimiliki oleh lelaki lain. Percayalah, aku akan selalu memegang kata-kataku ini dan akan terus mencintaimu.</p>
+                <p><small>Yang mencintaimu, @adamRamadhan</small></p>
+            </div>            
         </div>
     </section>
     
@@ -708,7 +1173,7 @@
     
     <!-- Music Player -->
     <div class="music-player">
-        <audio  id="background-music"  src="wwd.mp3juice.blog - yung kai - blue (Official Music Video).m4a"></audio>
+        <audio id="background-music" src="KOMANG - RAIM LAODE LYRIC OFFICIAL.mp3"></audio>
         <div class="music-controls">
             <button class="play-pause" id="play-pause">
                 <i class="fas fa-play" id="play-icon"></i>
@@ -716,16 +1181,14 @@
             <div class="song-info">Lagu Kita</div>
         </div>
     </div>
-    
-    <!-- Script
-    
+        
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Loading Screen
+            // Loading Screen - Diubah menjadi 2000ms (2 detik)
             setTimeout(function() {
                 document.querySelector('.loading').classList.add('hidden');
-            }, 2000);
+            }, 5000);
             
             // Smooth Scrolling for Navigation
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -737,12 +1200,19 @@
                     });
                 });
             });
-            
+    
             // Intersection Observer for Sections
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        
+                        // Special case for letter content
+                        if (entry.target.id === 'love-letter') {
+                            setTimeout(() => {
+                                document.querySelector('.letter-content').classList.add('visible');
+                            }, 500);
+                        }
                     }
                 });
             }, { threshold: 0.1 });
@@ -766,21 +1236,6 @@
                 messageObserver.observe(card);
             });
             
-            // Intersection Observer for Memory Items
-            const memoryObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, 200 * Array.from(entry.target.parentNode.children).indexOf(entry.target));
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.memory-item').forEach(item => {
-                memoryObserver.observe(item);
-            });
-            
             // Intersection Observer for Awards
             const awardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -797,7 +1252,7 @@
             });
             
             // Award Modal
-            const modal = document.getElementById('award-modal');
+            const awardModal = document.getElementById('award-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalDescription = document.getElementById('modal-description');
             const closeModal = document.querySelector('.close-modal');
@@ -806,32 +1261,41 @@
                 award.addEventListener('click', function() {
                     modalTitle.textContent = this.getAttribute('data-title');
                     modalDescription.textContent = this.getAttribute('data-description');
-                    modal.classList.add('active');
+                    awardModal.classList.add('active');
                 });
             });
             
             closeModal.addEventListener('click', function() {
-                modal.classList.remove('active');
+                awardModal.classList.remove('active');
             });
             
             window.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
+                if (e.target === awardModal) {
+                    awardModal.classList.remove('active');
                 }
             });
             
             // Floating Hearts
             const heartsContainer = document.querySelector('body');
             const heartButton = document.getElementById('heart-button');
+            const secretMessage = document.getElementById('secret-message');
             
-            heartButton.addEventListener('click', function() {
-                createHearts(20);
-                
-                // Vibration effect if available
-                if (navigator.vibrate) {
-                    navigator.vibrate(200);
-                }
-            });
+            if (heartButton && secretMessage) {
+                heartButton.addEventListener('click', function() {
+                    createHearts(20);
+                    secretMessage.style.display = 'block';
+                    
+                    // Scroll to secret message
+                    setTimeout(() => {
+                        secretMessage.scrollIntoView({ behavior: 'smooth' });
+                    }, 500);
+                    
+                    // Vibration effect if available
+                    if (navigator.vibrate) {
+                        navigator.vibrate([200, 100, 200]);
+                    }
+                });
+            }
             
             function createHearts(num) {
                 for (let i = 0; i < num; i++) {
@@ -842,7 +1306,7 @@
                         heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
                         heart.innerHTML = '❤️';
                         heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                        heartsContainer.appendChild(heart);
+                        document.body.appendChild(heart);
                         
                         heart.style.animation = 'floatHeart ' + heart.style.animationDuration + ' ease-in forwards';
                         
@@ -853,61 +1317,148 @@
                 }
             }
             
+            // Letter Seal Animation
+            const letterSeal = document.getElementById('letter-seal');
+            
+            if (letterSeal) {
+                letterSeal.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-lock-open"></i>';
+                    this.style.backgroundColor = '#d68e8e';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-heart"></i>';
+                        this.style.backgroundColor = '#e8a9a9';
+                    }, 2000);
+                    
+                    // Vibration effect if available
+                    if (navigator.vibrate) {
+                        navigator.vibrate([100, 50, 100]);
+                    }
+                });
+            }
+            
             // Dark Mode Toggle
             const darkModeToggle = document.getElementById('dark-mode-toggle');
-            const body = document.body;
-            const icon = darkModeToggle.querySelector('i');
             
-            darkModeToggle.addEventListener('click', function() {
-                body.classList.toggle('dark-mode');
+            if (darkModeToggle) {
+                const body = document.body;
+                const icon = darkModeToggle.querySelector('i');
                 
-                if (body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
-            });
+                darkModeToggle.addEventListener('click', function() {
+                    body.classList.toggle('dark-mode');
+                    
+                    if (body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                });
+            }
             
-// Ambil elemen audio dan tombol kontrol
-const audio = document.getElementById('background-music');
-const playPauseBtn = document.getElementById('play-pause');
-const playIcon = document.getElementById('play-icon');
-
-// Status awal musik
-let isPlaying = false;
-
-// Tambahkan event listener untuk tombol play/pause
-playPauseBtn.addEventListener('click', function () {
-    if (isPlaying) {
-        audio.pause(); // Pause musik
-        playIcon.classList.remove('fa-pause');
-        playIcon.classList.add('fa-play');
-    } else {
-        audio.play(); // Play musik
-        playIcon.classList.remove('fa-play');
-        playIcon.classList.add('fa-pause');
-    }
-    isPlaying = !isPlaying; // Toggle status musik
-});
-
-            // Header Scroll Effect
-            let prevScrollpos = window.pageYOffset;
+            // Music Player
+            const audio = document.getElementById('background-music');
+            const playPauseBtn = document.getElementById('play-pause');
             
+            if (audio && playPauseBtn) {
+                const playIcon = document.getElementById('play-icon');
+                let isPlaying = false;
+                
+                // Set volume awal
+                audio.volume = 0.3;
+                
+                playPauseBtn.addEventListener('click', function() {
+                    if (isPlaying) {
+                        audio.pause();
+                        playIcon.classList.remove('fa-pause');
+                        playIcon.classList.add('fa-play');
+                    } else {
+                        audio.play().then(() => {
+                            playIcon.classList.remove('fa-play');
+                            playIcon.classList.add('fa-pause');
+                        }).catch(error => {
+                            console.log('Audio playback failed:', error);
+                            alert('Silakan klik tombol play untuk memulai musik');
+                        });
+                    }
+                    isPlaying = !isPlaying;
+                });
+            }
+            
+            // Header scroll effect
             window.addEventListener('scroll', function() {
-                const currentScrollPos = window.pageYOffset;
-                
-                if (prevScrollpos > currentScrollPos) {
-                    // Scrolling up
-                    document.querySelector('header').style.top = "0";
-                } else {
-                    // Scrolling down
-                    document.querySelector('header').style.top = "-70px";
+                const header = document.querySelector('header');
+                if (header) {
+                    const currentScrollPos = window.pageYOffset;
+                    const prevScrollpos = window.prevScrollpos || 0;
+                    
+                    if (prevScrollpos > currentScrollPos) {
+                        header.style.top = "0";
+                    } else {
+                        header.style.top = "-70px";
+                    }
+                    
+                    window.prevScrollpos = currentScrollPos;
                 }
-                
-                prevScrollpos = currentScrollPos;
             });
+            
+            // Countdown Timer
+            function updateCountdown() {
+                const countdownValue = document.querySelector('.countdown-value');
+                if (countdownValue) {
+                    const now = new Date();
+                    const firstMeetDate = new Date(2020, 7, 4); // 4 Agustus 2020
+                    const timeDiff = now - firstMeetDate;
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    countdownValue.textContent = days;
+                }
+            }
+    
+            updateCountdown();
+            
+            // Typing effect for welcome message
+            const texts = [
+                "Kamu itu spesial banget...",
+                "Nggak ada hari tanpa mikirin kamu.",
+                "Terima kasih udah hadir di hidupku :)"
+            ];
+            
+            let count = 0;
+            let index = 0;
+            let currentText = '';
+            let letter = '';
+            
+            function type() {
+                const typingElement = document.querySelector('.typing-text');
+                if (typingElement) {
+                    if (count === texts.length) {
+                        count = 0;
+                    }
+                    currentText = texts[count];
+                    letter = currentText.slice(0, ++index);
+                    
+                    typingElement.textContent = letter;
+                    if (letter.length === currentText.length) {
+                        count++;
+                        index = 0;
+                        setTimeout(type, 1500);
+                    } else {
+                        setTimeout(type, 100);
+                    }
+                }
+            }
+            
+            // Create typing text element if not exists
+            if (!document.querySelector('.typing-text')) {
+                const typingText = document.createElement('p');
+                typingText.classList.add('typing-text');
+                const welcomeContent = document.querySelector('.welcome-content');
+                if (welcomeContent) {
+                    welcomeContent.appendChild(typingText);
+                    type();
+                }
+            }
         });
     </script>
 </body>
